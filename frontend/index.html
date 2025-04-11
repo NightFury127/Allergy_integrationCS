@@ -3609,50 +3609,73 @@ nav {
         });
 
         // Symptom checker navigation
-        const questions = document.querySelectorAll('.question');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        let currentQuestion = 0;
+const questions = document.querySelectorAll('.question');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+let currentQuestion = 0;
 
-        function showQuestion(index) {
-            questions.forEach((q, i) => {
-                q.classList.toggle('active', i === index);
-            });
-            
-            prevBtn.disabled = index === 0;
-            nextBtn.textContent = index === questions.length - 1 ? 'Get Results' : 'Next';
-        }
+// Hide all questions initially except the first one (symptoms question)
+function initializeQuestions() {
+    questions.forEach((q, i) => {
+        q.style.display = 'none';
+    });
+    // Show the symptoms question first (index 0)
+    questions[0].style.display = 'block';
+    currentQuestion = 0;
+    updateNavigationButtons();
+}
 
-        function updateProgress() {
-            const progress = (currentQuestion + 1) / questions.length * 100;
-            document.querySelector('.progress-fill').style.width = `${progress}%`;
-        }
+function showQuestion(index) {
+    questions.forEach((q, i) => {
+        q.style.display = i === index ? 'block' : 'none';
+    });
+    
+    updateNavigationButtons();
+}
 
-        nextBtn.addEventListener('click', () => {
-            if (currentQuestion < questions.length - 1) {
-                currentQuestion++;
-                showQuestion(currentQuestion);
-                updateProgress();
-            } else {
-                alert('Symptom analysis complete. In a real app, this would show results.');
-            }
+function updateNavigationButtons() {
+    prevBtn.disabled = currentQuestion === 0;
+    nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Get Results' : 'Next';
+}
+
+nextBtn.addEventListener('click', () => {
+    if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        showQuestion(currentQuestion);
+    } else {
+        alert('Symptom analysis complete. In a real app, this would show results.');
+    }
+});
+
+prevBtn.addEventListener('click', () => {
+    if (currentQuestion > 0) {
+        currentQuestion--;
+        showQuestion(currentQuestion);
+    }
+});
+
+// Body map interaction
+document.querySelectorAll('.body-area').forEach(area => {
+    area.addEventListener('click', function() {
+        // First remove selection from all other areas
+        document.querySelectorAll('.body-area').forEach(el => {
+            el.classList.remove('selected');
         });
+        
+        // Then select just this one
+        this.classList.add('selected');
+        
+        // Initialize the questions (this will show the symptoms question first)
+        initializeQuestions();
+        
+        // Optional: Store the selected value
+        const selectedArea = this.getAttribute('data-area');
+        console.log("Selected area:", selectedArea);
+    });
+});
 
-        prevBtn.addEventListener('click', () => {
-            if (currentQuestion > 0) {
-                currentQuestion--;
-                showQuestion(currentQuestion);
-                updateProgress();
-            }
-        });
-
-        // Body map interaction
-        document.querySelectorAll('.body-area').forEach(area => {
-            area.addEventListener('click', function() {
-                this.classList.toggle('selected');
-            });
-        });
-
+// Initialize the symptom checker on page load
+initializeQuestions();
         // Option selection in symptom checker
         document.querySelectorAll('.option-btn').forEach(btn => {
             btn.addEventListener('click', function() {
