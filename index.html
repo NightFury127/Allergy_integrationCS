@@ -5236,5 +5236,77 @@ function showErrorMessage(message) {
     }, 3000);
 }
     </script>
+<script type="module" src="./firebase.js"></script>
+<script type="module">
+  import { auth } from './firebase.js';
+  import {
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword
+  } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+  // 🔐 LOGIN FORM
+  const loginForm = document.getElementById("login-form");
+  if (loginForm) {
+    loginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("login-email").value;
+      const password = document.getElementById("login-password").value;
+
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        const idToken = await user.getIdToken();
+
+        console.log("✅ Logged in:", user.email);
+        console.log("🪪 Token:", idToken);
+
+        // You can send the token to your Django backend here
+        // Example:
+        /*
+        await fetch("http://127.0.0.1:8000/secure-endpoint/", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${idToken}`
+          }
+        });
+        */
+
+        alert("Login successful!");
+      } catch (error) {
+        console.error("Login failed:", error.message);
+        alert("Login error: " + error.message);
+      }
+    });
+  }
+
+  // 🧾 SIGNUP FORM
+  const signupForm = document.getElementById("signup-form");
+  if (signupForm) {
+    signupForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("signup-name").value;
+      const email = document.getElementById("signup-email").value;
+      const password = document.getElementById("signup-password").value;
+      const confirm = document.getElementById("signup-confirm").value;
+
+      if (password !== confirm) {
+        alert("Passwords do not match.");
+        return;
+      }
+
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        console.log("✅ User signed up:", user.email);
+        alert("Account created successfully!");
+      } catch (error) {
+        console.error("Signup error:", error.message);
+        alert("Signup error: " + error.message);
+      }
+    });
+  }
+</script>
 </body>
 </html>
