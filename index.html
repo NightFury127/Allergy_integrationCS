@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,13 +33,13 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 25px 0;
+        padding: 25px 10px;
         margin-bottom: 30px;
         background-color: #f5f5f5; /* Light gray background */
         border-radius: 0 0 50px 50px; /* Curved bottom edges */
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         position: relative;
-        overflow: hidden;
+        overflow: visible;
     }
 
     /* Optional: Add a subtle gradient to the gray */
@@ -75,7 +76,7 @@
         display: flex;
         gap: 12px; /* Slightly more spacing between nav items */
         list-style: none;
-        margin-right: 30px; /* Add some spacing from the right edge */
+        margin-right: 15px; /* Add some spacing from the right edge */
     }
 
     nav a {
@@ -107,7 +108,7 @@
     .user-profile {
         background-color: white;
         padding: 5px 15px 5px 5px;
-        border-radius: 30px;
+        border-radius: 25px;
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         transition: all 0.3s;
     }
@@ -141,6 +142,7 @@
             gap: 10px;
             align-items: center;
             margin-right: 0;
+            margin-left: 30px;
         }
         
         nav a {
@@ -239,7 +241,7 @@
 
         /* Tab System */
         .tab-container {
-            margin: 40px 0;
+            margin: 30px ;
         }
 
         .tabs {
@@ -281,7 +283,7 @@
         /* Card Styles */
         .card-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 25px;
             margin: 20px 0;
         }
@@ -290,7 +292,7 @@
             background: white;
             border-radius: 12px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            overflow: hidden;
+            overflow: auto;
             transition: all 0.3s;
         }
 
@@ -417,7 +419,7 @@
 
         .navigation-btns {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-evenly;
             margin-top: 30px;
         }
 
@@ -585,7 +587,7 @@
             background: white;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            overflow: hidden;
+            overflow: auto;
             transform: translateY(20px);
             opacity: 0;
             visibility: hidden;
@@ -790,7 +792,7 @@
             background: #eee;
             margin: 20px 0;
             border-radius: 2px;
-            overflow: hidden;
+            overflow: auto;
         }
 
         .progress-fill {
@@ -887,11 +889,12 @@
 .symptom-checker {
   text-align: center;
   padding: 15px;
-  max-width: 280px;
+  max-width: 3000px;
+  max-height: 3000px;
   margin: 0 auto;
-  background: white;
+  background: #6754c41a;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(9, 9, 9, 0.474);
 }
 
 .symptom-checker h3 {
@@ -915,7 +918,7 @@
 
 .body-area {
   position: absolute;
-  background: rgba(74, 111, 165, 0.15);
+  background: #2a2b47a8;
   border-radius: 3px;
   cursor: pointer;
   transition: all 0.15s;
@@ -1268,7 +1271,7 @@ nav {
     margin: 20px 0;
     border: 2px dashed #ddd;
     border-radius: 8px;
-    overflow: hidden;
+    overflow: auto;
     position: relative;
     background: #f9f9f9;
     display: flex;
@@ -1349,29 +1352,7 @@ nav {
         grid-template-columns: 1fr;
     }
 }
-/* ===== Diary Section Styles ===== */
-.diary-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.diary-header .section-title {
-    color: var(--primary);
-    font-size: 2rem;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-}
-
-.diary-header .section-description {
-    color: #666;
-    font-size: 1.1rem;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
+/* Enhanced Diary Styles */
 .diary-container {
     background: white;
     border-radius: 12px;
@@ -1389,10 +1370,29 @@ nav {
     gap: 15px;
 }
 
-.diary-filters {
+.diary-actions {
     display: flex;
     gap: 10px;
+}
+
+.diary-filters {
+    display: flex;
+    gap: 15px;
     flex-wrap: wrap;
+    align-items: flex-end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+}
+
+.filter-group label {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 5px;
+    font-weight: 500;
 }
 
 .filter-select {
@@ -1409,12 +1409,38 @@ nav {
 .filter-select:focus {
     border-color: var(--primary);
     outline: none;
+    box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.2);
 }
 
-.diary-entries {
+.entries-header {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.entries-summary {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.no-entries {
+    text-align: center;
+    padding: 40px 20px;
+    color: #777;
+}
+
+.no-entries i {
+    font-size: 2.5rem;
+    color: #ddd;
+    margin-bottom: 15px;
+}
+
+.no-entries p {
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 .diary-entry {
@@ -1423,6 +1449,7 @@ nav {
     padding: 20px;
     transition: all 0.3s;
     position: relative;
+    margin-bottom: 15px;
 }
 
 .diary-entry.current {
@@ -1536,6 +1563,27 @@ nav {
     font-size: 0.95rem;
 }
 
+.entry-triggers {
+    margin-bottom: 15px;
+}
+
+.trigger-label {
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.trigger-item {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: rgba(74, 111, 165, 0.1);
+    border-radius: 15px;
+    font-size: 0.85rem;
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
 .entry-medications {
     display: flex;
     flex-direction: column;
@@ -1587,6 +1635,177 @@ nav {
     flex-wrap: wrap;
 }
 
+/* Statistics View */
+.statistics-view {
+    margin-top: 20px;
+}
+
+.stats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.stats-period {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.chart-container {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Modal Form Styles */
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.symptoms-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: auto;
+}
+
+.medications-list {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.medication-entry {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    background: #f5f7fa;
+    border-radius: 6px;
+}
+
+.medication-entry-name {
+    flex: 1;
+}
+
+.medication-entry-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Export Options */
+.export-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.export-option {
+    position: relative;
+}
+
+.export-option input {
+    position: absolute;
+    opacity: 0;
+}
+
+.export-option label {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.export-option input:checked + label {
+    border-color: var(--primary);
+    background-color: rgba(74, 111, 165, 0.05);
+}
+
+.export-option i {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    color: var(--primary);
+}
+
+.export-option span {
+    font-weight: 500;
+}
+
+.export-option small {
+    display: block;
+    font-size: 0.8rem;
+    color: #777;
+    margin-top: 3px;
+}
+
+.export-range {
+    margin-bottom: 20px;
+}
+
+.export-range label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .diary-controls {
@@ -1598,16 +1817,33 @@ nav {
         flex-direction: column;
     }
     
-    .entry-header {
+    .filter-group {
+        min-width: 100%;
+    }
+    
+    .entries-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
     }
     
-    .entry-date {
+    .form-row {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 5px;
+        gap: 15px;
+    }
+    
+    .symptoms-checkboxes {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .symptoms-checkboxes {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
     }
 }
 /* Telehealth Section Styles */
@@ -1735,7 +1971,7 @@ nav {
     position: relative;
     margin-bottom: 30px;
     border-radius: 10px;
-    overflow: hidden;
+    overflow: auto;
     height: 300px;
     background: #f5f7fa;
     display: flex;
@@ -2540,14 +2776,14 @@ textarea {
 .btn {
     padding: 10px 20px;
     border-radius: 8px;
-    font-size: 0.95rem;
+    font-size: 1.50rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    border: 1px solid transparent;
+    border: 10px solid transparent;
 }
 
 .btn-primary {
@@ -3371,322 +3607,300 @@ textarea {
         <h2 class="section-title">
             <i class="fas fa-book-medical"></i> Allergy Symptom Journal
         </h2>
-        <p class="section-description">Track your symptoms, triggers, and treatments over time</p>
+        <p class="section-description">Track your symptoms, triggers, and treatments to identify patterns and improve your allergy management</p>
     </div>
 
     <div class="diary-container">
         <div class="diary-controls">
-            <button class="btn btn-primary" id="add-entry-btn">
-                <i class="fas fa-plus-circle"></i> New Entry
-            </button>
+            <div class="diary-actions">
+                <button class="btn btn-primary" id="add-entry-btn">
+                    <i class="fas fa-plus-circle"></i> New Entry
+                </button>
+                <button class="btn btn-outline" id="view-stats-btn">
+                    <i class="fas fa-chart-pie"></i> View Statistics
+                </button>
+            </div>
+            
             <div class="diary-filters">
-                <select id="time-filter" class="filter-select">
-                    <option value="all">All Time</option>
-                    <option value="week">This Week</option>
-                    <option value="month">This Month</option>
-                    <option value="custom">Custom Range</option>
-                </select>
-                <select id="symptom-filter" class="filter-select">
-                    <option value="all">All Symptoms</option>
-                    <option value="sneezing">Sneezing</option>
-                    <option value="rash">Skin Rash</option>
-                    <option value="itching">Itching</option>
-                    <option value="swelling">Swelling</option>
-                </select>
+                <div class="filter-group">
+                    <label for="time-filter">Time Period</label>
+                    <select id="time-filter" class="filter-select">
+                        <option value="7">Last 7 Days</option>
+                        <option value="30" selected>Last 30 Days</option>
+                        <option value="90">Last 3 Months</option>
+                        <option value="365">Last Year</option>
+                        <option value="custom">Custom Range</option>
+                        <option value="all">All Entries</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="severity-filter">Severity</label>
+                    <select id="severity-filter" class="filter-select">
+                        <option value="all">All Levels</option>
+                        <option value="mild">Mild</option>
+                        <option value="moderate">Moderate</option>
+                        <option value="severe">Severe</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="symptom-filter">Symptoms</label>
+                    <select id="symptom-filter" class="filter-select">
+                        <option value="all">All Symptoms</option>
+                        <option value="sneezing">Sneezing</option>
+                        <option value="runny-nose">Runny Nose</option>
+                        <option value="itchy-eyes">Itchy Eyes</option>
+                        <option value="rash">Skin Rash</option>
+                        <option value="swelling">Swelling</option>
+                        <option value="breathing">Breathing Issues</option>
+                    </select>
+                </div>
+                
+                <button class="btn btn-secondary" id="apply-filters-btn">
+                    <i class="fas fa-filter"></i> Apply
+                </button>
+                <button class="btn btn-outline" id="reset-filters-btn">
+                    <i class="fas fa-redo"></i> Reset
+                </button>
             </div>
         </div>
 
-        <div class="diary-entries">
-            <!-- Today's Entry -->
-            <div class="diary-entry current">
-                <div class="entry-header">
-                    <div class="entry-date">
-                        <div class="date-day">Today</div>
-                        <div class="date-full">June 15, 2023</div>
-                    </div>
-                    <div class="entry-severity mild">
-                        <i class="fas fa-thermometer-half"></i> Mild
-                    </div>
-                </div>
-                
-                <div class="entry-content">
-                    <div class="symptoms-list">
-                        <span class="symptom-tag sneezing">
-                            <i class="fas fa-wind"></i> Sneezing
-                        </span>
-                        <span class="symptom-tag runny-nose">
-                            <i class="fas fa-tint"></i> Runny nose
-                        </span>
-                        <span class="symptom-tag itchy-eyes">
-                            <i class="fas fa-eye"></i> Itchy eyes
-                        </span>
-                    </div>
-                    
-                    <div class="entry-notes">
-                        <p>Morning walk in Central Park. Symptoms began about 30 minutes after being outside. High pollen count according to weather report.</p>
-                    </div>
-                    
-                    <div class="entry-medications">
-                        <div class="medication-item">
-                            <i class="fas fa-pills"></i>
-                            <span class="medication-name">Cetirizine (Zyrtec)</span>
-                            <span class="medication-time">10:45 AM</span>
-                        </div>
-                        <div class="medication-item">
-                            <i class="fas fa-eye-dropper"></i>
-                            <span class="medication-name">Artificial tears</span>
-                            <span class="medication-time">As needed</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="entry-actions">
-                    <button class="btn btn-outline btn-sm">
-                        <i class="fas fa-edit"></i> Edit
-                    </button>
-                    <button class="btn btn-outline btn-sm">
-                        <i class="fas fa-chart-line"></i> Trends
-                    </button>
+        <!-- Statistics View (hidden by default) -->
+        <div class="statistics-view" id="statistics-view" style="display: none;">
+            <div class="stats-header">
+                <h3><i class="fas fa-chart-bar"></i> Your Allergy Trends</h3>
+                <div class="stats-period">
+                    <span id="stats-period-label">Last 30 Days</span>
                 </div>
             </div>
-
-            <!-- Past Entry -->
-            <div class="diary-entry">
-                <div class="entry-header">
-                    <div class="entry-date">
-                        <div class="date-day">Wednesday</div>
-                        <div class="date-full">June 12, 2023</div>
-                    </div>
-                    <div class="entry-severity moderate">
-                        <i class="fas fa-thermometer-three-quarters"></i> Moderate
-                    </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="total-entries">0</div>
+                    <div class="stat-label">Total Entries</div>
                 </div>
-                
-                <div class="entry-content">
-                    <div class="symptoms-list">
-                        <span class="symptom-tag rash">
-                            <i class="fas fa-allergies"></i> Skin rash
-                        </span>
-                        <span class="symptom-tag itching">
-                            <i class="fas fa-hand-paper"></i> Itching
-                        </span>
-                    </div>
-                    
-                    <div class="entry-notes">
-                        <p>Tried new laundry detergent (Brand: CleanFresh). Developed red, itchy patches on arms and torso about 2 hours after wearing washed clothes. Symptoms improved after shower and application of hydrocortisone cream.</p>
-                    </div>
-                    
-                    <div class="entry-medications">
-                        <div class="medication-item">
-                            <i class="fas fa-prescription-bottle-alt"></i>
-                            <span class="medication-name">Diphenhydramine (Benadryl)</span>
-                            <span class="medication-time">25mg at 3:30 PM</span>
-                        </div>
-                        <div class="medication-item">
-                            <i class="fas fa-burn"></i>
-                            <span class="medication-name">Hydrocortisone cream</span>
-                            <span class="medication-time">Applied twice</span>
-                        </div>
-                    </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="avg-severity">0</div>
+                    <div class="stat-label">Average Severity</div>
                 </div>
-                
-                <div class="entry-actions">
-                    <button class="btn btn-outline btn-sm">
-                        <i class="fas fa-edit"></i> Edit
-                    </button>
-                    <button class="btn btn-outline btn-sm">
-                        <i class="fas fa-chart-line"></i> Trends
-                    </button>
+                <div class="stat-card">
+                    <div class="stat-value" id="top-symptom">-</div>
+                    <div class="stat-label">Most Common Symptom</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="top-trigger">-</div>
+                    <div class="stat-label">Most Common Trigger</div>
                 </div>
             </div>
-
-            <!-- Older Entry -->
-            <div class="diary-entry">
-                <div class="entry-header">
-                    <div class="entry-date">
-                        <div class="date-day">Monday</div>
-                        <div class="date-full">June 5, 2023</div>
-                    </div>
-                    <div class="entry-severity severe">
-                        <i class="fas fa-thermometer-full"></i> Severe
-                    </div>
-                </div>
-                
-                <div class="entry-content">
-                    <div class="symptoms-list">
-                        <span class="symptom-tag swelling">
-                            <i class="fas fa-lips"></i> Lip swelling
-                        </span>
-                        <span class="symptom-tag hives">
-                            <i class="fas fa-dot-circle"></i> Hives
-                        </span>
-                        <span class="symptom-tag breathing">
-                            <i class="fas fa-lungs"></i> Breathing difficulty
-                        </span>
-                    </div>
-                    
-                    <div class="entry-notes">
-                        <p>Accidental exposure to peanuts at restaurant (cross-contamination). Used EpiPen and called 911. Spent 4 hours in emergency department for observation.</p>
-                    </div>
-                    
-                    <div class="entry-medications">
-                        <div class="medication-item emergency">
-                            <i class="fas fa-syringe"></i>
-                            <span class="medication-name">Epinephrine (EpiPen)</span>
-                            <span class="medication-time">12:15 PM</span>
-                        </div>
-                        <div class="medication-item">
-                            <i class="fas fa-prescription-bottle-alt"></i>
-                            <span class="medication-name">Prednisone</span>
-                            <span class="medication-time">40mg for 5 days</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="entry-actions">
-                    <button class="btn btn-outline btn-sm">
-                        <i class="fas fa-edit"></i> Edit
-                    </button>
-                    <button class="btn btn-outline btn-sm">
-                        <i class="fas fa-chart-line"></i> Trends
-                    </button>
-                </div>
+            
+            <div class="chart-container">
+                <canvas id="severity-chart"></canvas>
             </div>
+            
+            <div class="chart-container">
+                <canvas id="symptoms-chart"></canvas>
+            </div>
+            
+            <button class="btn btn-outline" id="back-to-entries-btn">
+                <i class="fas fa-arrow-left"></i> Back to Entries
+            </button>
         </div>
 
-        <div class="diary-footer">
-            <button class="btn btn-secondary">
-                <i class="fas fa-file-export"></i> Export Diary
-            </button>
-            <button class="btn btn-secondary">
-                <i class="fas fa-share-medical"></i> Share with Doctor
-            </button>
-            <button class="btn btn-outline">
-                <i class="fas fa-chart-pie"></i> View Statistics
-            </button>
+        <!-- Entries View -->
+        <div class="entries-view" id="entries-view">
+            <div class="entries-header">
+                <h3 id="entries-title">Your Diary Entries</h3>
+                <div class="entries-summary">
+                    <span id="entries-count">0 entries</span>
+                    <span id="entries-period">(Last 30 days)</span>
+                </div>
+            </div>
+            
+            <div class="diary-entries" id="diary-entries-container">
+                <!-- Entries will be loaded here dynamically -->
+                <div class="no-entries" id="no-entries-message">
+                    <i class="fas fa-book-open"></i>
+                    <p>No entries found. Create your first entry to start tracking your allergies.</p>
+                </div>
+            </div>
+            
+            <div class="diary-footer">
+                <button class="btn btn-secondary" id="export-diary-btn">
+                    <i class="fas fa-file-export"></i> Export Diary
+                </button>
+            </div>
         </div>
     </div>
 </div>
-<!-- Modal HTML -->
-<div class="modal" id="diary-entry-modal">
+
+<!-- Entry Modal -->
+<div class="modal" id="entry-modal">
     <div class="modal-content">
         <span class="close-modal">&times;</span>
-        <div class="modal-header">
-            <h3><i class="fas fa-book-medical"></i> New Diary Entry</h3>
-            <p class="subtitle">Track your allergy symptoms and treatments</p>
-        </div>
+        <h3 id="modal-title"><i class="fas fa-book-medical"></i> New Diary Entry</h3>
         
-        <form id="diary-entry-form">
+        <form id="entry-form">
+            <input type="hidden" id="entry-id">
+            
             <div class="form-row">
                 <div class="form-group">
-                    <label for="entry-date">Date</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-calendar-alt"></i>
-                        <input type="date" id="entry-date" required>
-                    </div>
+                    <label for="entry-date">Date & Time</label>
+                    <input type="datetime-local" id="entry-date" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="entry-severity">Severity</label>
-                    <div class="select-wrapper">
-                        <select id="entry-severity" required>
-                            <option value="">Select severity...</option>
-                            <option value="mild">Mild</option>
-                            <option value="moderate">Moderate</option>
-                            <option value="severe">Severe</option>
-                        </select>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
+                    <select id="entry-severity" required>
+                        <option value="">Select severity</option>
+                        <option value="mild">Mild (minor symptoms)</option>
+                        <option value="moderate">Moderate (noticeable discomfort)</option>
+                        <option value="severe">Severe (disruptive or dangerous)</option>
+                    </select>
                 </div>
             </div>
             
             <div class="form-group">
                 <label>Symptoms</label>
                 <div class="symptoms-checkboxes">
-                    <label class="elegant-checkbox">
-                        <input type="checkbox" name="symptoms" value="sneezing">
-                        <span class="checkmark"></span>
-                        <span class="label-text">Sneezing</span>
-                        <i class="fas fa-wind"></i>
-                    </label>
-                    <label class="elegant-checkbox">
-                        <input type="checkbox" name="symptoms" value="runny-nose">
-                        <span class="checkmark"></span>
-                        <span class="label-text">Runny nose</span>
-                        <i class="fas fa-tint"></i>
-                    </label>
-                    <label class="elegant-checkbox">
-                        <input type="checkbox" name="symptoms" value="itchy-eyes">
-                        <span class="checkmark"></span>
-                        <span class="label-text">Itchy eyes</span>
-                        <i class="fas fa-eye"></i>
-                    </label>
-                    <label class="elegant-checkbox">
-                        <input type="checkbox" name="symptoms" value="rash">
-                        <span class="checkmark"></span>
-                        <span class="label-text">Skin rash</span>
-                        <i class="fas fa-allergies"></i>
-                    </label>
-                    <label class="elegant-checkbox">
-                        <input type="checkbox" name="symptoms" value="swelling">
-                        <span class="checkmark"></span>
-                        <span class="label-text">Swelling</span>
-                        <i class="fas fa-lips"></i>
-                    </label>
-                    <label class="elegant-checkbox">
-                        <input type="checkbox" name="symptoms" value="breathing">
-                        <span class="checkmark"></span>
-                        <span class="label-text">Breathing difficulty</span>
-                        <i class="fas fa-lungs"></i>
-                    </label>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="symptom-sneezing" value="sneezing">
+                        <label for="symptom-sneezing">Sneezing</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="symptom-runny-nose" value="runny-nose">
+                        <label for="symptom-runny-nose">Runny Nose</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="symptom-itchy-eyes" value="itchy-eyes">
+                        <label for="symptom-itchy-eyes">Itchy/Watery Eyes</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="symptom-rash" value="rash">
+                        <label for="symptom-rash">Skin Rash/Hives</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="symptom-swelling" value="swelling">
+                        <label for="symptom-swelling">Swelling</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="symptom-breathing" value="breathing">
+                        <label for="symptom-breathing">Breathing Difficulty</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="symptom-other" value="other">
+                        <label for="symptom-other">Other</label>
+                        <input type="text" id="symptom-other-text" placeholder="Specify" style="display: none;">
+                    </div>
                 </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="entry-triggers">Potential Triggers</label>
+                <input type="text" id="entry-triggers" placeholder="e.g., pollen, pet dander, certain foods">
+            </div>
+            
+            <div class="form-group">
+                <label for="entry-location">Location</label>
+                <input type="text" id="entry-location" placeholder="Where were you when symptoms started?">
             </div>
             
             <div class="form-group">
                 <label for="entry-notes">Notes</label>
-                <textarea id="entry-notes" rows="4" placeholder="Describe your symptoms, possible triggers, environment details..."></textarea>
+                <textarea id="entry-notes" rows="4" placeholder="Describe your symptoms, any patterns you notice, or additional details"></textarea>
             </div>
             
             <div class="form-group">
                 <label>Medications Taken</label>
-                <div id="medication-entries" class="medication-entries-container">
+                <div class="medications-list" id="medications-list">
                     <!-- Medications will be added here -->
                 </div>
-                <button type="button" class="btn btn-outline btn-sm" id="add-medication-entry">
+                <button type="button" class="btn btn-outline btn-sm" id="add-medication-btn">
                     <i class="fas fa-plus"></i> Add Medication
                 </button>
             </div>
             
             <div class="form-actions">
-                <button type="button" class="btn btn-secondary close-modal-btn">Cancel</button>
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-save"></i> Save Entry
-                </button>
+                <button type="button" class="btn btn-outline" id="cancel-entry-btn">Cancel</button>
+                <button type="submit" class="btn btn-primary" id="save-entry-btn">Save Entry</button>
             </div>
         </form>
     </div>
 </div>
 
-<!-- Medication Entry Template -->
-<div id="medication-entry-template" style="display: none;">
-    <div class="medication-entry">
-        <div class="medication-entry-fields">
-            <div class="input-with-icon">
-                <i class="fas fa-pills"></i>
-                <input type="text" placeholder="Medication name" class="med-name" required>
+<!-- Medication Modal -->
+<div class="modal" id="medication-modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h3><i class="fas fa-pills"></i> Add Medication</h3>
+        
+        <form id="medication-form">
+            <div class="form-group">
+                <label for="med-name">Medication Name</label>
+                <input type="text" id="med-name" required>
             </div>
-            <div class="input-with-icon">
-                <i class="fas fa-prescription-bottle-alt"></i>
-                <input type="text" placeholder="Dosage" class="med-dosage">
+            
+            <div class="form-group">
+                <label for="med-dosage">Dosage</label>
+                <input type="text" id="med-dosage" placeholder="e.g., 10mg tablet, 2 sprays" required>
             </div>
-            <div class="input-with-icon">
-                <i class="fas fa-clock"></i>
-                <input type="text" placeholder="Time taken" class="med-time">
+            
+            <div class="form-group">
+                <label for="med-time">Time Taken</label>
+                <input type="time" id="med-time" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="med-effectiveness">Effectiveness</label>
+                <select id="med-effectiveness">
+                    <option value="not-effective">Not Effective</option>
+                    <option value="somewhat-effective">Somewhat Effective</option>
+                    <option value="effective" selected>Effective</option>
+                    <option value="very-effective">Very Effective</option>
+                </select>
+            </div>
+            
+            <div class="form-actions">
+                <button type="button" class="btn btn-outline" id="cancel-med-btn">Cancel</button>
+                <button type="submit" class="btn btn-primary">Add Medication</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Export Modal -->
+<div class="modal" id="export-modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h3><i class="fas fa-file-export"></i> Export Diary</h3>
+        
+        <div class="export-options">
+            <div class="export-option">
+                <input type="radio" id="export-pdf" name="export-format" value="pdf" checked>
+                <label for="export-pdf">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>PDF Document</span>
+                    <small>Best for printing and sharing</small>
+                </label>
             </div>
         </div>
-        <button type="button" class="btn btn-icon remove-medication">
-            <i class="fas fa-times"></i>
-        </button>
+        
+        <div class="export-range">
+            <label>Date Range</label>
+            <select id="export-range">
+                <option value="current">Current View</option>
+                <option value="7">Last 7 Days</option>
+                <option value="30">Last 30 Days</option>
+                <option value="90">Last 3 Months</option>
+                <option value="all">All Entries</option>
+                <option value="custom">Custom Range</option>
+            </select>
+        </div>
+        
+        <div class="export-actions">
+            <button type="button" class="btn btn-outline" id="cancel-export-btn">Cancel</button>
+            <button type="button" class="btn btn-primary" id="confirm-export-btn">Export</button>
+        </div>
     </div>
 </div>
         <!-- Scanner Section -->
@@ -4081,49 +4295,73 @@ textarea {
         });
 
         // Symptom checker navigation
-        const questions = document.querySelectorAll('.question');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        let currentQuestion = 0;
+const questions = document.querySelectorAll('.question');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+let currentQuestion = 0;
 
-        function showQuestion(index) {
-            questions.forEach((q, i) => {
-                q.classList.toggle('active', i === index);
-            });
-            
-            prevBtn.disabled = index === 0;
-            nextBtn.textContent = index === questions.length - 1 ? 'Get Results' : 'Next';
-        }
+// Hide all questions initially except the first one (symptoms question)
+function initializeQuestions() {
+    questions.forEach((q, i) => {
+        q.style.display = 'none';
+    });
+    // Show the symptoms question first (index 0)
+    questions[0].style.display = 'block';
+    currentQuestion = 0;
+    updateNavigationButtons();
+}
 
-        function updateProgress() {
-            const progress = (currentQuestion + 1) / questions.length * 100;
-            document.querySelector('.progress-fill').style.width = `${progress}%`;
-        }
+function showQuestion(index) {
+    questions.forEach((q, i) => {
+        q.style.display = i === index ? 'block' : 'none';
+    });
+    
+    updateNavigationButtons();
+}
 
-        nextBtn.addEventListener('click', () => {
-            if (currentQuestion < questions.length - 1) {
-                currentQuestion++;
-                showQuestion(currentQuestion);
-                updateProgress();
-            } else {
-                alert('Symptom analysis complete. In a real app, this would show results.');
-            }
+function updateNavigationButtons() {
+    prevBtn.disabled = currentQuestion === 0;
+    nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Get Results' : 'Next';
+}
+
+nextBtn.addEventListener('click', () => {
+    if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        showQuestion(currentQuestion);
+    } else {
+        alert('Symptom analysis complete. In a real app, this would show results.');
+    }
+});
+
+prevBtn.addEventListener('click', () => {
+    if (currentQuestion > 0) {
+        currentQuestion--;
+        showQuestion(currentQuestion);
+    }
+});
+
+// Body map interaction
+document.querySelectorAll('.body-area').forEach(area => {
+    area.addEventListener('click', function() {
+        // First remove selection from all other areas
+        document.querySelectorAll('.body-area').forEach(el => {
+            el.classList.remove('selected');
         });
+        
+        // Then select just this one
+        this.classList.add('selected');
+        
+        // Initialize the questions (this will show the symptoms question first)
+        initializeQuestions();
+        
+        // Optional: Store the selected value
+        const selectedArea = this.getAttribute('data-area');
+        console.log("Selected area:", selectedArea);
+    });
+});
 
-        prevBtn.addEventListener('click', () => {
-            if (currentQuestion > 0) {
-                currentQuestion--;
-                showQuestion(currentQuestion);
-                updateProgress();
-            }
-        });
-
-        // Body map interaction
-        document.querySelectorAll('.body-area').forEach(area => {
-            area.addEventListener('click', function() {
-                this.classList.toggle('selected');
-            });
-        });
+// Initialize the symptom checker on page load
+initializeQuestions();
 
         // Option selection in symptom checker
         document.querySelectorAll('.option-btn').forEach(btn => {
@@ -4851,390 +5089,1055 @@ function showSuccessMessage(message) {
         successMsg.style.display = 'none';
     }, 3000);
 }
+// Diary Functionality
 document.addEventListener('DOMContentLoaded', function() {
-    // Modal elements
-    const diaryEntryModal = document.getElementById('diary-entry-modal');
+    // Initialize variables
+    let entries = JSON.parse(localStorage.getItem('allergyDiaryEntries')) || [];
+    let currentFilters = {
+        timePeriod: '30',
+        severity: 'all',
+        symptom: 'all'
+    };
+    
+    // DOM Elements
+    const entriesContainer = document.getElementById('diary-entries-container');
+    const noEntriesMessage = document.getElementById('no-entries-message');
+    const entriesCount = document.getElementById('entries-count');
+    const entriesPeriod = document.getElementById('entries-period');
     const addEntryBtn = document.getElementById('add-entry-btn');
-    const closeModalBtn = document.querySelector('#diary-entry-modal .close-modal');
-    const closeModalBtnSecondary = document.querySelector('.close-modal-btn');
-    const diaryEntryForm = document.getElementById('diary-entry-form');
-    const addMedicationBtn = document.getElementById('add-medication-entry');
-    const medicationEntries = document.getElementById('medication-entries');
-    const medicationTemplate = document.getElementById('medication-entry-template');
+    const viewStatsBtn = document.getElementById('view-stats-btn');
+    const backToEntriesBtn = document.getElementById('back-to-entries-btn');
+    const timeFilter = document.getElementById('time-filter');
+    const severityFilter = document.getElementById('severity-filter');
+    const symptomFilter = document.getElementById('symptom-filter');
+    const applyFiltersBtn = document.getElementById('apply-filters-btn');
+    const resetFiltersBtn = document.getElementById('reset-filters-btn');
+    const exportDiaryBtn = document.getElementById('export-diary-btn');
+    const entryModal = document.getElementById('entry-modal');
+    const entryForm = document.getElementById('entry-form');
+    const modalTitle = document.getElementById('modal-title');
+    const entryIdInput = document.getElementById('entry-id');
+    const entryDateInput = document.getElementById('entry-date');
+    const entrySeveritySelect = document.getElementById('entry-severity');
+    const entryTriggersInput = document.getElementById('entry-triggers');
+    const entryLocationInput = document.getElementById('entry-location');
+    const entryNotesTextarea = document.getElementById('entry-notes');
+    const medicationsList = document.getElementById('medications-list');
+    const addMedicationBtn = document.getElementById('add-medication-btn');
+    const saveEntryBtn = document.getElementById('save-entry-btn');
+    const cancelEntryBtn = document.getElementById('cancel-entry-btn');
+    const medicationModal = document.getElementById('medication-modal');
+    const medicationForm = document.getElementById('medication-form');
+    const medNameInput = document.getElementById('med-name');
+    const medDosageInput = document.getElementById('med-dosage');
+    const medTimeInput = document.getElementById('med-time');
+    const medEffectivenessSelect = document.getElementById('med-effectiveness');
+    const cancelMedBtn = document.getElementById('cancel-med-btn');
+    const exportModal = document.getElementById('export-modal');
+    const confirmExportBtn = document.getElementById('confirm-export-btn');
+    const cancelExportBtn = document.getElementById('cancel-export-btn');
+    const statisticsView = document.getElementById('statistics-view');
+    const entriesView = document.getElementById('entries-view');
+    const totalEntriesEl = document.getElementById('total-entries');
+    const avgSeverityEl = document.getElementById('avg-severity');
+    const topSymptomEl = document.getElementById('top-symptom');
+    const topTriggerEl = document.getElementById('top-trigger');
+    const statsPeriodLabel = document.getElementById('stats-period-label');
     
-    // Open modal with animation
-    addEntryBtn.addEventListener('click', function() {
-        // Set default date to today
-        const today = new Date().toISOString().split('T')[0];
-        document.getElementById('entry-date').value = today;
-        diaryEntryModal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    });
+    // Initialize Chart.js if available
+    let severityChart, symptomsChart;
     
-    // Close modal
-    function closeModal() {
-        diaryEntryModal.style.animation = 'fadeOut 0.3s ease-out';
-        setTimeout(() => {
-            diaryEntryModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            diaryEntryModal.style.animation = '';
-        }, 300);
-    }
+    // Load entries on page load
+    loadEntries();
     
-    closeModalBtn.addEventListener('click', closeModal);
-    closeModalBtnSecondary.addEventListener('click', closeModal);
+    // Event Listeners
+    addEntryBtn.addEventListener('click', openNewEntryModal);
+    viewStatsBtn.addEventListener('click', showStatisticsView);
+    backToEntriesBtn.addEventListener('click', showEntriesView);
+    applyFiltersBtn.addEventListener('click', applyFilters);
+    resetFiltersBtn.addEventListener('click', resetFilters);
+    exportDiaryBtn.addEventListener('click', openExportModal);
+    entryForm.addEventListener('submit', saveEntry);
+    cancelEntryBtn.addEventListener('click', closeEntryModal);
+    addMedicationBtn.addEventListener('click', openMedicationModal);
+    medicationForm.addEventListener('submit', addMedicationToEntry);
+    cancelMedBtn.addEventListener('click', closeMedicationModal);
+    confirmExportBtn.addEventListener('click', exportDiary);
+    cancelExportBtn.addEventListener('click', closeExportModal);
     
-    window.addEventListener('click', function(e) {
-        if (e.target === diaryEntryModal) {
-            closeModal();
-        }
-    });
-    
-    // Add medication entry with animation
-    addMedicationBtn.addEventListener('click', function() {
-        const newEntry = medicationTemplate.cloneNode(true);
-        newEntry.id = '';
-        newEntry.style.display = 'block';
-        newEntry.style.opacity = '0';
-        newEntry.style.transform = 'translateY(10px)';
-        
-        // Add remove functionality
-        newEntry.querySelector('.remove-medication').addEventListener('click', function() {
-            newEntry.style.transform = 'translateY(-10px)';
-            newEntry.style.opacity = '0';
-            setTimeout(() => {
-                newEntry.remove();
-            }, 300);
+    // Symptom checkboxes
+    document.querySelectorAll('.symptoms-checkboxes input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            if (this.id === 'symptom-other' && this.checked) {
+                document.getElementById('symptom-other-text').style.display = 'block';
+            } else if (this.id === 'symptom-other') {
+                document.getElementById('symptom-other-text').style.display = 'none';
+            }
         });
-        
-        medicationEntries.appendChild(newEntry);
-        
-        // Animate in
-        setTimeout(() => {
-            newEntry.style.opacity = '1';
-            newEntry.style.transform = 'translateY(0)';
-        }, 10);
     });
     
-    // Form submission with validation
-    diaryEntryForm.addEventListener('submit', function(e) {
-        e.preventDefault();
+    // Functions
+    function loadEntries() {
+        const filteredEntries = filterEntries(entries);
         
-        // Validate form
-        const date = document.getElementById('entry-date').value;
-        const severity = document.getElementById('entry-severity').value;
-        
-        if (!date || !severity) {
-            showErrorMessage('Please fill in all required fields');
-            return;
-        }
-        
-        // Get form values
-        const notes = document.getElementById('entry-notes').value;
-        
-        // Get selected symptoms
-        const symptomCheckboxes = document.querySelectorAll('input[name="symptoms"]:checked');
-        const symptoms = Array.from(symptomCheckboxes).map(cb => cb.value);
-        
-        // Get medications
-        const medEntries = document.querySelectorAll('.medication-entry');
-        const medications = Array.from(medEntries).map(entry => {
-            return {
-                name: entry.querySelector('.med-name').value,
-                dosage: entry.querySelector('.med-dosage').value,
-                time: entry.querySelector('.med-time').value
-            };
-        }).filter(med => med.name.trim() !== '');
-        
-        // Create new diary entry with unique ID
-        const newEntry = {
-            id: Date.now().toString(), // Unique ID for each entry
-            date: date,
-            severity: severity,
-            symptoms: symptoms,
-            notes: notes,
-            medications: medications,
-            createdAt: new Date().toISOString()
-        };
-        
-        // Save entry to localStorage
-        saveDiaryEntry(newEntry);
-        
-        // Close modal and reset form
-        closeModal();
-        this.reset();
-        medicationEntries.innerHTML = '';
-        
-        // Show success message
-        showSuccessMessage('Diary entry saved successfully!');
-    });
-    
-    // Load diary entries on page load
-    loadDiaryEntries();
-});
-
-// Save diary entry to localStorage
-function saveDiaryEntry(entry) {
-    try {
-        let entries = JSON.parse(localStorage.getItem('allergyDiaryEntries') || '[]');
-        
-        // Check if this is an update to existing entry
-        const existingIndex = entries.findIndex(e => e.id === entry.id);
-        if (existingIndex >= 0) {
-            entries[existingIndex] = entry; // Update existing entry
+        if (filteredEntries.length === 0) {
+            noEntriesMessage.style.display = 'block';
+            entriesContainer.innerHTML = '';
         } else {
-            entries.unshift(entry); // Add new entry to beginning
+            noEntriesMessage.style.display = 'none';
+            renderEntries(filteredEntries);
         }
         
-        localStorage.setItem('allergyDiaryEntries', JSON.stringify(entries));
-        renderDiaryEntry(entry);
-    } catch (error) {
-        console.error('Error saving diary entry:', error);
-        showErrorMessage('Failed to save entry. Please try again.');
+        updateEntriesSummary(filteredEntries);
     }
-}
-
-// Load diary entries from localStorage
-function loadDiaryEntries() {
-    try {
-        const entries = JSON.parse(localStorage.getItem('allergyDiaryEntries') || '[]');
+    
+    function filterEntries(entries) {
+        const now = new Date();
+        let filtered = [...entries];
+        
+        // Filter by time period
+        if (currentFilters.timePeriod !== 'all') {
+            const days = parseInt(currentFilters.timePeriod);
+            const cutoffDate = new Date(now.setDate(now.getDate() - days));
+            
+            filtered = filtered.filter(entry => {
+                const entryDate = new Date(entry.date);
+                return entryDate >= cutoffDate;
+            });
+        }
+        
+        // Filter by severity
+        if (currentFilters.severity !== 'all') {
+            filtered = filtered.filter(entry => entry.severity === currentFilters.severity);
+        }
+        
+        // Filter by symptom
+        if (currentFilters.symptom !== 'all') {
+            filtered = filtered.filter(entry => {
+                return entry.symptoms.includes(currentFilters.symptom) || 
+                      (currentFilters.symptom === 'other' && entry.symptoms.includes('other'));
+            });
+        }
+        
+        return filtered;
+    }
+    
+    function renderEntries(entries) {
+        entriesContainer.innerHTML = '';
         
         // Sort by date (newest first)
         entries.sort((a, b) => new Date(b.date) - new Date(a.date));
         
-        // Clear existing entries (except template if present)
-        const diaryContainer = document.querySelector('.diary-entries');
-        diaryContainer.innerHTML = '';
-        
-        // Render each entry
         entries.forEach(entry => {
-            renderDiaryEntry(entry);
-        });
-        
-        if (entries.length === 0) {
-            diaryContainer.innerHTML = `
-                <div class="empty-state">
-                    <i class="fas fa-book-open"></i>
-                    <h3>No entries yet</h3>
-                    <p>Add your first allergy diary entry to get started</p>
+            const entryEl = document.createElement('div');
+            entryEl.className = 'diary-entry';
+            if (isToday(new Date(entry.date))) {
+                entryEl.classList.add('current');
+            }
+            
+            const formattedDate = formatEntryDate(new Date(entry.date));
+            const severityClass = `severity-${entry.severity}`;
+            
+            // Create symptoms tags
+            const symptomsTags = entry.symptoms.map(symptom => {
+                let displayText = symptom;
+                if (symptom === 'other' && entry.otherSymptom) {
+                    displayText = entry.otherSymptom;
+                }
+                
+                return `<span class="symptom-tag ${symptom}">
+                    <i class="fas fa-${getSymptomIcon(symptom)}"></i> ${displayText}
+                </span>`;
+            }).join('');
+            
+            // Create medications list
+            const medicationsList = entry.medications.map(med => {
+                return `<div class="medication-item ${med.isEmergency ? 'emergency' : ''}">
+                    <i class="fas fa-${getMedIcon(med.type)}"></i>
+                    <span class="medication-name">${med.name} (${med.dosage})</span>
+                    <span class="medication-time">${med.time}</span>
+                </div>`;
+            }).join('');
+            
+            entryEl.innerHTML = `
+                <div class="entry-header">
+                    <div class="entry-date">
+                        <div class="date-day">${formattedDate.day}</div>
+                        <div class="date-full">${formattedDate.full}</div>
+                    </div>
+                    <div class="entry-severity ${entry.severity}">
+                        <i class="fas fa-thermometer-${getThermometerIcon(entry.severity)}"></i> 
+                        ${capitalizeFirstLetter(entry.severity)}
+                    </div>
+                </div>
+                
+                <div class="entry-content">
+                    <div class="symptoms-list">
+                        ${symptomsTags}
+                    </div>
+                    
+                    ${entry.triggers ? `
+                    <div class="entry-triggers">
+                        <div class="trigger-label">Potential Triggers:</div>
+                        ${entry.triggers.split(',').map(trigger => 
+                            `<span class="trigger-item">${trigger.trim()}</span>`
+                        ).join('')}
+                    </div>
+                    ` : ''}
+                    
+                    ${entry.location ? `
+                    <div class="entry-location">
+                        <div class="location-label">Location:</div>
+                        <div class="location-value">${entry.location}</div>
+                    </div>
+                    ` : ''}
+                    
+                    ${entry.notes ? `
+                    <div class="entry-notes">
+                        <p>${entry.notes}</p>
+                    </div>
+                    ` : ''}
+                    
+                    ${entry.medications.length > 0 ? `
+                    <div class="entry-medications">
+                        ${medicationsList}
+                    </div>
+                    ` : ''}
+                </div>
+                
+                <div class="entry-actions">
+                    <button class="btn btn-outline btn-sm edit-btn" data-id="${entry.id}">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                    <button class="btn btn-outline btn-sm delete-btn" data-id="${entry.id}">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
                 </div>
             `;
-        }
-    } catch (error) {
-        console.error('Error loading diary entries:', error);
-        showErrorMessage('Failed to load entries. Please refresh the page.');
-    }
-}
-
-// Delete a diary entry
-function deleteDiaryEntry(entryId) {
-    try {
-        let entries = JSON.parse(localStorage.getItem('allergyDiaryEntries') || '[]');
-        entries = entries.filter(entry => entry.id !== entryId);
-        localStorage.setItem('allergyDiaryEntries', JSON.stringify(entries));
-        loadDiaryEntries(); // Refresh the list
-        showSuccessMessage('Entry deleted successfully');
-    } catch (error) {
-        console.error('Error deleting entry:', error);
-        showErrorMessage('Failed to delete entry. Please try again.');
-    }
-}
-
-// Render a diary entry in the UI
-function renderDiaryEntry(entry) {
-    const entryDate = new Date(entry.date);
-    const today = new Date();
-    const isToday = entryDate.toDateString() === today.toDateString();
-    
-    const entryElement = document.createElement('div');
-    entryElement.className = `diary-entry ${isToday ? 'current' : ''}`;
-    entryElement.dataset.entryId = entry.id;
-    entryElement.style.opacity = '0';
-    entryElement.style.transform = 'translateY(20px)';
-    entryElement.style.transition = 'all 0.4s ease-out';
-    
-    // Format date strings
-    const dayName = isToday ? 'Today' : entryDate.toLocaleDateString('en-US', { weekday: 'long' });
-    const fullDate = entryDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-    
-    // Create symptom tags
-    const symptomTags = entry.symptoms.map(symptom => {
-        const icon = {
-            'sneezing': 'fa-wind',
-            'runny-nose': 'fa-tint',
-            'itchy-eyes': 'fa-eye',
-            'rash': 'fa-allergies',
-            'swelling': 'fa-lips',
-            'breathing': 'fa-lungs'
-        }[symptom] || 'fa-question-circle';
-        
-        return `<span class="symptom-tag ${symptom}">
-            <i class="fas ${icon}"></i> ${symptom.replace('-', ' ')}
-        </span>`;
-    }).join('');
-    
-    // Create medication items
-    const medicationItems = entry.medications.map(med => {
-        const icon = med.name.toLowerCase().includes('epi') ? 'fa-syringe' : 
-                    med.name.toLowerCase().includes('cream') ? 'fa-burn' : 
-                    med.name.toLowerCase().includes('spray') ? 'fa-spray-can' : 
-                    'fa-pills';
-        
-        return `<div class="medication-item ${med.name.toLowerCase().includes('epi') ? 'emergency' : ''}">
-            <i class="fas ${icon}"></i>
-            <span class="medication-name">${med.name}</span>
-            ${med.dosage ? `<span class="medication-dosage">${med.dosage}</span>` : ''}
-            ${med.time ? `<span class="medication-time">${med.time}</span>` : ''}
-        </div>`;
-    }).join('');
-    
-    // Create the full entry HTML
-    entryElement.innerHTML = `
-        <div class="entry-header">
-            <div class="entry-date">
-                <div class="date-day">${dayName}</div>
-                <div class="date-full">${fullDate}</div>
-            </div>
-            <div class="entry-severity ${entry.severity}">
-                <i class="fas fa-thermometer-${getSeverityIcon(entry.severity)}"></i> 
-                ${entry.severity.charAt(0).toUpperCase() + entry.severity.slice(1)}
-            </div>
-        </div>
-        
-        ${symptomTags ? `<div class="symptoms-list">${symptomTags}</div>` : ''}
-        
-        ${entry.notes ? `<div class="entry-notes"><p>${entry.notes}</p></div>` : ''}
-        
-        ${medicationItems ? `<div class="entry-medications">${medicationItems}</div>` : ''}
-        
-        <div class="entry-actions">
-            <button class="btn btn-outline btn-sm edit-entry">
-                <i class="fas fa-edit"></i> Edit
-            </button>
-            <button class="btn btn-outline btn-sm delete-entry">
-                <i class="fas fa-trash-alt"></i> Delete
-            </button>
-        </div>
-    `;
-    
-    // Add event listeners for actions
-    entryElement.querySelector('.edit-entry').addEventListener('click', () => {
-        editDiaryEntry(entry.id);
-    });
-    
-    entryElement.querySelector('.delete-entry').addEventListener('click', () => {
-        if (confirm('Are you sure you want to delete this entry?')) {
-            deleteDiaryEntry(entry.id);
-        }
-    });
-    
-    // Add to the top of the diary entries
-    const diaryEntries = document.querySelector('.diary-entries');
-    diaryEntries.insertBefore(entryElement, diaryEntries.firstChild);
-    
-    // Animate in
-    setTimeout(() => {
-        entryElement.style.opacity = '1';
-        entryElement.style.transform = 'translateY(0)';
-    }, 10);
-}
-
-// Edit an existing diary entry
-function editDiaryEntry(entryId) {
-    const entries = JSON.parse(localStorage.getItem('allergyDiaryEntries') || '[]');
-    const entry = entries.find(e => e.id === entryId);
-    
-    if (!entry) {
-        showErrorMessage('Entry not found');
-        return;
-    }
-    
-    // Open modal
-    const diaryEntryModal = document.getElementById('diary-entry-modal');
-    diaryEntryModal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-    
-    // Fill form with entry data
-    document.getElementById('entry-date').value = entry.date;
-    document.getElementById('entry-severity').value = entry.severity;
-    document.getElementById('entry-notes').value = entry.notes || '';
-    
-    // Check symptom checkboxes
-    document.querySelectorAll('input[name="symptoms"]').forEach(checkbox => {
-        checkbox.checked = entry.symptoms.includes(checkbox.value);
-    });
-    
-    // Add medications
-    const medicationEntries = document.getElementById('medication-entries');
-    medicationEntries.innerHTML = '';
-    
-    entry.medications.forEach(med => {
-        const newEntry = document.getElementById('medication-entry-template').cloneNode(true);
-        newEntry.id = '';
-        newEntry.style.display = 'block';
-        
-        newEntry.querySelector('.med-name').value = med.name;
-        newEntry.querySelector('.med-dosage').value = med.dosage || '';
-        newEntry.querySelector('.med-time').value = med.time || '';
-        
-        newEntry.querySelector('.remove-medication').addEventListener('click', function() {
-            newEntry.style.transform = 'translateY(-10px)';
-            newEntry.style.opacity = '0';
-            setTimeout(() => {
-                newEntry.remove();
-            }, 300);
+            
+            entriesContainer.appendChild(entryEl);
         });
         
-        medicationEntries.appendChild(newEntry);
-    });
+        // Add event listeners to edit/delete buttons
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const entryId = this.getAttribute('data-id');
+                editEntry(entryId);
+            });
+        });
+        
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const entryId = this.getAttribute('data-id');
+                deleteEntry(entryId);
+            });
+        });
+    }
     
-    // Store the entry ID in the form for reference during save
-    document.getElementById('diary-entry-form').dataset.editingEntryId = entryId;
-}
-
-function getSeverityIcon(severity) {
+    function updateEntriesSummary(entries) {
+        entriesCount.textContent = `${entries.length} ${entries.length === 1 ? 'entry' : 'entries'}`;
+        
+        let periodText = '';
+        switch(currentFilters.timePeriod) {
+            case '7':
+                periodText = '(Last 7 days)';
+                break;
+            case '30':
+                periodText = '(Last 30 days)';
+                break;
+            case '90':
+                periodText = '(Last 3 months)';
+                break;
+            case '365':
+                periodText = '(Last year)';
+                break;
+            case 'all':
+                periodText = '(All entries)';
+                break;
+            default:
+                periodText = '(Custom range)';
+        }
+        
+        entriesPeriod.textContent = periodText;
+    }
+    
+    function openNewEntryModal() {
+        modalTitle.innerHTML = '<i class="fas fa-book-medical"></i> New Diary Entry';
+        entryIdInput.value = '';
+        entryForm.reset();
+        medicationsList.innerHTML = '';
+        
+        // Set default date/time to now
+        const now = new Date();
+        const timezoneOffset = now.getTimezoneOffset() * 60000;
+        const localISOTime = (new Date(now - timezoneOffset)).toISOString().slice(0, 16);
+        entryDateInput.value = localISOTime;
+        
+        // Reset symptom checkboxes
+        document.querySelectorAll('.symptoms-checkboxes input[type="checkbox"]').forEach(checkbox => {
+            checkbox.checked = false;
+        });
+        document.getElementById('symptom-other-text').style.display = 'none';
+        
+        entryModal.style.display = 'block';
+    }
+    
+    function editEntry(entryId) {
+        const entry = entries.find(e => e.id === entryId);
+        if (!entry) return;
+        
+        modalTitle.innerHTML = '<i class="fas fa-edit"></i> Edit Diary Entry';
+        entryIdInput.value = entry.id;
+        
+        // Set form values
+        const entryDate = new Date(entry.date);
+        const timezoneOffset = entryDate.getTimezoneOffset() * 60000;
+        const localISOTime = (new Date(entryDate - timezoneOffset)).toISOString().slice(0, 16);
+        entryDateInput.value = localISOTime;
+        
+        entrySeveritySelect.value = entry.severity;
+        entryTriggersInput.value = entry.triggers || '';
+        entryLocationInput.value = entry.location || '';
+        entryNotesTextarea.value = entry.notes || '';
+        
+        // Set symptom checkboxes
+        document.querySelectorAll('.symptoms-checkboxes input[type="checkbox"]').forEach(checkbox => {
+            checkbox.checked = entry.symptoms.includes(checkbox.value);
+        });
+        
+        if (entry.symptoms.includes('other') && entry.otherSymptom) {
+            document.getElementById('symptom-other-text').style.display = 'block';
+            document.getElementById('symptom-other-text').value = entry.otherSymptom;
+        } else {
+            document.getElementById('symptom-other-text').style.display = 'none';
+        }
+        
+        // Set medications
+        medicationsList.innerHTML = '';
+        entry.medications.forEach(med => {
+            addMedicationToDOM(med);
+        });
+        
+        entryModal.style.display = 'block';
+    }
+    
+    function saveEntry(e) {
+        e.preventDefault();
+        
+        const entryId = entryIdInput.value;
+        const date = entryDateInput.value;
+        const severity = entrySeveritySelect.value;
+        const triggers = entryTriggersInput.value;
+        const location = entryLocationInput.value;
+        const notes = entryNotesTextarea.value;
+        
+        // Get selected symptoms
+        const symptoms = [];
+        document.querySelectorAll('.symptoms-checkboxes input[type="checkbox"]:checked').forEach(checkbox => {
+            symptoms.push(checkbox.value);
+        });
+        
+        let otherSymptom = '';
+        if (symptoms.includes('other')) {
+            otherSymptom = document.getElementById('symptom-other-text').value;
+        }
+        
+        // Get medications
+        const medications = [];
+        document.querySelectorAll('.medication-entry').forEach(medEl => {
+            medications.push({
+                id: medEl.getAttribute('data-id'),
+                name: medEl.querySelector('.medication-entry-name').textContent,
+                dosage: medEl.getAttribute('data-dosage'),
+                time: medEl.getAttribute('data-time'),
+                effectiveness: medEl.getAttribute('data-effectiveness'),
+                isEmergency: medEl.getAttribute('data-emergency') === 'true',
+                type: medEl.getAttribute('data-type')
+            });
+        });
+        
+        const entryData = {
+            id: entryId || generateId(),
+            date,
+            severity,
+            symptoms,
+            otherSymptom,
+            triggers,
+            location,
+            notes,
+            medications,
+            createdAt: entryId ? 
+                entries.find(e => e.id === entryId).createdAt : 
+                new Date().toISOString()
+        };
+        
+        if (entryId) {
+            // Update existing entry
+            const index = entries.findIndex(e => e.id === entryId);
+            entries[index] = entryData;
+        } else {
+            // Add new entry
+            entries.unshift(entryData);
+        }
+        
+        saveEntries();
+        closeEntryModal();
+        loadEntries();
+        
+        showSuccessMessage(`Entry ${entryId ? 'updated' : 'added'} successfully!`);
+    }
+    
+    function deleteEntry(entryId) {
+        if (confirm('Are you sure you want to delete this entry?')) {
+            entries = entries.filter(entry => entry.id !== entryId);
+            saveEntries();
+            loadEntries();
+            showSuccessMessage('Entry deleted successfully!');
+        }
+    }
+    
+    function openMedicationModal() {
+        medicationForm.reset();
+        medicationModal.style.display = 'block';
+    }
+    
+    function closeMedicationModal() {
+        medicationModal.style.display = 'none';
+    }
+    
+    function addMedicationToEntry(e) {
+        e.preventDefault();
+        
+        const name = medNameInput.value;
+        const dosage = medDosageInput.value;
+        const time = medTimeInput.value;
+        const effectiveness = medEffectivenessSelect.value;
+        
+        // Simple type detection (in a real app, this would be more sophisticated)
+        let type = 'other';
+        if (name.toLowerCase().includes('epi') || name.toLowerCase().includes('pen')) {
+            type = 'emergency';
+        } else if (name.toLowerCase().includes('spray')) {
+            type = 'nasal';
+        } else if (name.toLowerCase().includes('drop')) {
+            type = 'eye';
+        } else if (name.toLowerCase().includes('inhal')) {
+            type = 'inhaler';
+        } else if (name.toLowerCase().includes('tab') || name.toLowerCase().includes('cap')) {
+            type = 'antihistamine';
+        }
+        
+        const isEmergency = type === 'emergency';
+        
+        const medication = {
+            id: generateId(),
+            name,
+            dosage,
+            time,
+            effectiveness,
+            isEmergency,
+            type
+        };
+        
+        addMedicationToDOM(medication);
+        closeMedicationModal();
+    }
+    
+    function addMedicationToDOM(medication) {
+        const medEl = document.createElement('div');
+        medEl.className = 'medication-entry';
+        medEl.setAttribute('data-id', medication.id);
+        medEl.setAttribute('data-dosage', medication.dosage);
+        medEl.setAttribute('data-time', medication.time);
+        medEl.setAttribute('data-effectiveness', medication.effectiveness);
+        medEl.setAttribute('data-emergency', medication.isEmergency);
+        medEl.setAttribute('data-type', medication.type);
+        
+        medEl.innerHTML = `
+            <div class="medication-entry-name">${medication.name} (${medication.dosage})</div>
+            <div class="medication-entry-actions">
+                <button class="btn-icon edit-med-btn" title="Edit">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn-icon delete-med-btn" title="Delete">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        `;
+        
+        medicationsList.appendChild(medEl);
+        
+        // Add event listeners
+        medEl.querySelector('.edit-med-btn').addEventListener('click', function() {
+            // Populate medication form with existing data
+            medNameInput.value = medication.name;
+            medDosageInput.value = medication.dosage;
+            medTimeInput.value = medication.time;
+            medEffectivenessSelect.value = medication.effectiveness;
+            
+            // Remove this medication entry
+            medEl.remove();
+            
+            // Open medication modal
+            medicationModal.style.display = 'block';
+        });
+        
+        medEl.querySelector('.delete-med-btn').addEventListener('click', function() {
+            medEl.remove();
+        });
+    }
+    
+    function closeEntryModal() {
+        entryModal.style.display = 'none';
+    }
+    
+    function applyFilters() {
+        currentFilters = {
+            timePeriod: timeFilter.value,
+            severity: severityFilter.value,
+            symptom: symptomFilter.value
+        };
+        
+        loadEntries();
+    }
+    
+    function resetFilters() {
+        timeFilter.value = '30';
+        severityFilter.value = 'all';
+        symptomFilter.value = 'all';
+        
+        currentFilters = {
+            timePeriod: '30',
+            severity: 'all',
+            symptom: 'all'
+        };
+        
+        loadEntries();
+    }
+    
+    function showStatisticsView() {
+        entriesView.style.display = 'none';
+        statisticsView.style.display = 'block';
+        
+        updateStatistics();
+    }
+    
+    function showEntriesView() {
+        statisticsView.style.display = 'none';
+        entriesView.style.display = 'block';
+    }
+    
+    function updateStatistics() {
+        const filteredEntries = filterEntries(entries);
+        
+        // Update stats period label
+        let periodText = '';
+        switch(currentFilters.timePeriod) {
+            case '7':
+                periodText = 'Last 7 Days';
+                break;
+            case '30':
+                periodText = 'Last 30 Days';
+                break;
+            case '90':
+                periodText = 'Last 3 Months';
+                break;
+            case '365':
+                periodText = 'Last Year';
+                break;
+            case 'all':
+                periodText = 'All Time';
+                break;
+            default:
+                periodText = 'Custom Range';
+        }
+        statsPeriodLabel.textContent = periodText;
+        
+        // Basic stats
+        totalEntriesEl.textContent = filteredEntries.length;
+        
+        // Average severity (convert to 1-3 scale: mild=1, moderate=2, severe=3)
+        if (filteredEntries.length > 0) {
+            const severitySum = filteredEntries.reduce((sum, entry) => {
+                return sum + (entry.severity === 'mild' ? 1 : entry.severity === 'moderate' ? 2 : 3);
+            }, 0);
+            
+            const avgSeverity = (severitySum / filteredEntries.length).toFixed(1);
+            avgSeverityEl.textContent = avgSeverity;
+        } else {
+            avgSeverityEl.textContent = '0';
+        }
+        
+        // Most common symptom
+        if (filteredEntries.length > 0) {
+            const symptomCounts = {};
+            filteredEntries.forEach(entry => {
+                entry.symptoms.forEach(symptom => {
+                    symptomCounts[symptom] = (symptomCounts[symptom] || 0) + 1;
+                });
+            });
+            
+            let topSymptom = '';
+            let maxCount = 0;
+            
+            for (const [symptom, count] of Object.entries(symptomCounts)) {
+                if (count > maxCount) {
+                    maxCount = count;
+                    topSymptom = symptom === 'other' ? 
+                        'Various' : 
+                        capitalizeFirstLetter(symptom.replace('-', ' '));
+                }
+            }
+            
+            topSymptomEl.textContent = topSymptom;
+        } else {
+            topSymptomEl.textContent = '-';
+        }
+        
+        // Most common trigger
+        if (filteredEntries.length > 0) {
+            const triggerCounts = {};
+            filteredEntries.forEach(entry => {
+                if (entry.triggers) {
+                    entry.triggers.split(',').forEach(trigger => {
+                        const trimmed = trigger.trim().toLowerCase();
+                        if (trimmed) {
+                            triggerCounts[trimmed] = (triggerCounts[trimmed] || 0) + 1;
+                        }
+                    });
+                }
+            });
+            
+            let topTrigger = '';
+            let maxCount = 0;
+            
+            for (const [trigger, count] of Object.entries(triggerCounts)) {
+                if (count > maxCount) {
+                    maxCount = count;
+                    topTrigger = capitalizeFirstLetter(trigger);
+                }
+            }
+            
+            topTriggerEl.textContent = topTrigger || 'Unknown';
+        } else {
+            topTriggerEl.textContent = '-';
+        }
+        
+        // Update charts if Chart.js is available
+        if (typeof Chart !== 'undefined') {
+            updateCharts(filteredEntries);
+        }
+    }
+    
+    function updateCharts(entries) {
+        // Severity over time chart
+        const severityData = groupEntriesByDate(entries);
+        
+        if (severityChart) {
+            severityChart.destroy();
+        }
+        
+        const severityCtx = document.getElementById('severity-chart').getContext('2d');
+        severityChart = new Chart(severityCtx, {
+            type: 'line',
+            data: {
+                labels: severityData.dates,
+                datasets: [
+                    {
+                        label: 'Severity (1-3 scale)',
+                        data: severityData.avgSeverity,
+                        borderColor: '#4A6FA5',
+                        backgroundColor: 'rgba(74, 111, 165, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Severity Over Time'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `Avg. severity: ${context.raw.toFixed(1)}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        min: 1,
+                        max: 3,
+                        ticks: {
+                            callback: function(value) {
+                                if (value === 1) return 'Mild';
+                                if (value === 2) return 'Moderate';
+                                if (value === 3) return 'Severe';
+                                return '';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Symptoms frequency chart
+        const symptomData = countSymptoms(entries);
+        
+        if (symptomsChart) {
+            symptomsChart.destroy();
+        }
+        
+        const symptomsCtx = document.getElementById('symptoms-chart').getContext('2d');
+        symptomsChart = new Chart(symptomsCtx, {
+            type: 'bar',
+            data: {
+                labels: symptomData.labels,
+                datasets: [{
+                    label: 'Number of Entries',
+                    data: symptomData.counts,
+                    backgroundColor: [
+                        'rgba(74, 111, 165, 0.7)',
+                        'rgba(107, 140, 66, 0.7)',
+                        'rgba(255, 126, 95, 0.7)',
+                        'rgba(220, 53, 69, 0.7)',
+                        'rgba(255, 193, 7, 0.7)',
+                        'rgba(23, 162, 184, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(74, 111, 165, 1)',
+                        'rgba(107, 140, 66, 1)',
+                        'rgba(255, 126, 95, 1)',
+                        'rgba(220, 53, 69, 1)',
+                        'rgba(255, 193, 7, 1)',
+                        'rgba(23, 162, 184, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Symptoms Frequency'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    function groupEntriesByDate(entries) {
+        // Group by date and calculate average severity for each day
+        const grouped = {};
+        
+        entries.forEach(entry => {
+            const date = new Date(entry.date).toLocaleDateString();
+            const severityValue = entry.severity === 'mild' ? 1 : entry.severity === 'moderate' ? 2 : 3;
+            
+            if (!grouped[date]) {
+                grouped[date] = {
+                    total: severityValue,
+                    count: 1
+                };
+            } else {
+                grouped[date].total += severityValue;
+                grouped[date].count += 1;
+            }
+        });
+        
+        // Convert to arrays for chart
+        const dates = Object.keys(grouped).sort((a, b) => new Date(a) - new Date(b));
+        const avgSeverity = dates.map(date => grouped[date].total / grouped[date].count);
+        
+        return {
+            dates,
+            avgSeverity
+        };
+    }
+    
+    function countSymptoms(entries) {
+        const counts = {
+            'sneezing': 0,
+            'runny-nose': 0,
+            'itchy-eyes': 0,
+            'rash': 0,
+            'swelling': 0,
+            'breathing': 0,
+            'other': 0
+        };
+        
+        entries.forEach(entry => {
+            entry.symptoms.forEach(symptom => {
+                counts[symptom]++;
+            });
+        });
+        
+        // Filter out symptoms with 0 counts and format labels
+        const labels = [];
+        const countsData = [];
+        
+        for (const [symptom, count] of Object.entries(counts)) {
+            if (count > 0) {
+                labels.push(capitalizeFirstLetter(symptom.replace('-', ' ')));
+                countsData.push(count);
+            }
+        }
+        
+        return {
+            labels,
+            counts: countsData
+        };
+    }
+    
+    function openExportModal() {
+        exportModal.style.display = 'block';
+    }
+    
+    function closeExportModal() {
+        exportModal.style.display = 'none';
+    }
+    
+    function exportDiary() {
+        const format = document.querySelector('input[name="export-format"]:checked').value;
+        const range = document.getElementById('export-range').value;
+        
+        let entriesToExport = [...entries];
+        
+        // Filter by range if needed
+        if (range !== 'all') {
+            const now = new Date();
+            let cutoffDate;
+            
+            if (range === 'current') {
+                // Use current filters
+                entriesToExport = filterEntries(entries);
+            } else if (range === 'custom') {
+                // In a real app, you'd implement custom date range selection
+                alert('Custom date range selection would be implemented here');
+                return;
+            } else {
+                const days = parseInt(range);
+                cutoffDate = new Date(now.setDate(now.getDate() - days));
+                
+                entriesToExport = entriesToExport.filter(entry => {
+                    const entryDate = new Date(entry.date);
+                    return entryDate >= cutoffDate;
+                });
+            }
+        }
+        
+        // Sort by date (newest first)
+        entriesToExport.sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        // Prepare data for export
+const exportData = entriesToExport.map(entry => {
     return {
-        'mild': 'half',
-        'moderate': 'three-quarters',
-        'severe': 'full'
-    }[severity];
-}
-
-function showSuccessMessage(message) {
-    const successMsg = document.createElement('div');
-    successMsg.className = 'notification success';
-    successMsg.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
-    document.body.appendChild(successMsg);
+        Date: formatExportDate(new Date(entry.date)),
+        Severity: capitalizeFirstLetter(entry.severity),
+        Symptoms: entry.symptoms.map(s => 
+            s === 'other' && entry.otherSymptom ? 
+            entry.otherSymptom : 
+            capitalizeFirstLetter(s.replace('-', ' '))
+        ).join(', '),
+        Triggers: entry.triggers || '',
+        Location: entry.location || '',
+        Notes: entry.notes || '',
+        Medications: entry.medications.map(m => `${m.name} (${m.dosage}) at ${m.time}`).join('; ')
+    };
+});
+        
+        // Export based on format
+        if (format === 'csv') {
+            exportToCSV(exportData);
+        } else if (format === 'json') {
+            exportToJSON(exportData);
+        } else {
+            // Default to PDF
+            exportToPDF(exportData);
+        }
+        
+        closeExportModal();
+        showSuccessMessage('Export completed successfully!');
+    }
     
-    setTimeout(() => {
-        successMsg.style.opacity = '1';
-    }, 10);
+    function exportToCSV(data) {
+        // Convert to CSV
+        const headers = Object.keys(data[0] || {});
+        const csvRows = [];
+        
+        // Add header row
+        csvRows.push(headers.join(','));
+        
+        // Add data rows
+        for (const row of data) {
+            const values = headers.map(header => {
+                const escaped = ('' + row[header]).replace(/"/g, '\\"');
+                return `"${escaped}"`;
+            });
+            csvRows.push(values.join(','));
+        }
+        
+        // Create CSV file
+        const csvContent = csvRows.join('\n');
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        
+        // Download
+        const link = document.createElement('a');
+        link.setAttribute('href', url);
+        link.setAttribute('download', `allergy-diary-${new Date().toISOString().slice(0,10)}.csv`);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
     
-    setTimeout(() => {
-        successMsg.style.opacity = '0';
+    function exportToJSON(data) {
+        // Create JSON file
+        const jsonContent = JSON.stringify(data, null, 2);
+        const blob = new Blob([jsonContent], { type: 'application/json;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        
+        // Download
+        const link = document.createElement('a');
+        link.setAttribute('href', url);
+        link.setAttribute('download', `allergy-diary-${new Date().toISOString().slice(0,10)}.json`);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+    
+    function exportToPDF(data) {
+        // In a real app, you would use a PDF library like jsPDF or make an API call
+        // This is a simplified version that just shows what would happen
+        alert('In a real app, this would generate a PDF with all your diary entries');
+    }
+    
+    function saveEntries() {
+        localStorage.setItem('allergyDiaryEntries', JSON.stringify(entries));
+    }
+    
+    // Helper functions
+    function generateId() {
+        return Date.now().toString(36) + Math.random().toString(36).substr(2);
+    }
+    
+    function formatEntryDate(date) {
+        const today = new Date();
+        const yesterday = new Date(today);
+        yesterday.setDate(yesterday.getDate() - 1);
+        
+        if (isSameDay(date, today)) {
+            return {
+                day: 'Today',
+                full: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+            };
+        } else if (isSameDay(date, yesterday)) {
+            return {
+                day: 'Yesterday',
+                full: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+            };
+        } else {
+            return {
+                day: date.toLocaleDateString('en-US', { weekday: 'long' }),
+                full: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+            };
+        }
+    }
+    
+    function formatExportDate(date) {
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    }
+    
+    function isSameDay(date1, date2) {
+        return date1.getFullYear() === date2.getFullYear() &&
+               date1.getMonth() === date2.getMonth() &&
+               date1.getDate() === date2.getDate();
+    }
+    
+    function isToday(date) {
+        const today = new Date();
+        return isSameDay(date, today);
+    }
+    
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+    
+    function getSymptomIcon(symptom) {
+        const icons = {
+            'sneezing': 'wind',
+            'runny-nose': 'tint',
+            'itchy-eyes': 'eye',
+            'rash': 'allergies',
+            'swelling': 'lips',
+            'breathing': 'lungs',
+            'other': 'question-circle'
+        };
+        return icons[symptom] || 'question-circle';
+    }
+    
+    function getMedIcon(type) {
+        const icons = {
+            'antihistamine': 'capsules',
+            'nasal': 'spray-can',
+            'eye': 'eye-dropper',
+            'inhaler': 'lungs',
+            'emergency': 'syringe',
+            'other': 'pills'
+        };
+        return icons[type] || 'pills';
+    }
+    
+    function getThermometerIcon(severity) {
+        const icons = {
+            'mild': 'quarter',
+            'moderate': 'half',
+            'severe': 'three-quarters'
+        };
+        return icons[severity] || 'quarter';
+    }
+    
+    function showSuccessMessage(message) {
+        const successMsg = document.querySelector('.success-message');
+        successMsg.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+        successMsg.style.display = 'block';
         setTimeout(() => {
-            successMsg.remove();
-        }, 300);
-    }, 3000);
-}
-
-function showErrorMessage(message) {
-    const errorMsg = document.createElement('div');
-    errorMsg.className = 'notification error';
-    errorMsg.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
-    document.body.appendChild(errorMsg);
+            successMsg.style.display = 'none';
+        }, 3000);
+    }
     
-    setTimeout(() => {
-        errorMsg.style.opacity = '1';
-    }, 10);
-    
-    setTimeout(() => {
-        errorMsg.style.opacity = '0';
-        setTimeout(() => {
-            errorMsg.remove();
-        }, 300);
-    }, 3000);
-}
+    // Initialize charts if Chart.js is loaded
+    if (typeof Chart !== 'undefined') {
+        updateStatistics();
+    } else {
+        // Load Chart.js dynamically if not already loaded
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+        script.onload = updateStatistics;
+        document.head.appendChild(script);
+    }
+});
     </script>
 <script type="module" src="./firebase.js"></script>
 <script type="module">

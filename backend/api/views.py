@@ -5,6 +5,7 @@ import pytesseract
 from PIL import Image
 import speech_recognition as sr
 import io
+import requests
 
 # Set path for Tesseract OCR
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
@@ -12,6 +13,21 @@ pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tessera
 # Sample list of common allergens
 COMMON_ALLERGENS = ['peanut', 'milk', 'egg', 'soy', 'wheat', 'fish', 'shellfish', 'tree nut']
 
+# Function to fetch medicine data
+def fetch_medicine_info(medicine_name):
+    try:
+        url = f"https://api.fda.gov/drug/label.json?search=brand_name:{medicine_name}&limit=1"
+        response = requests.get(url)
+        data = response.json()
+
+        if data.get('results'):
+            return data['results'][0]  # Returns the first result
+        else:
+            return None
+    except Exception as e:
+        return None
+
+# Endpoint to check for allergens in text
 @csrf_exempt
 def check_allergies(request):
     if request.method == 'POST':
@@ -39,7 +55,7 @@ def check_allergies(request):
 
     return JsonResponse({'error': 'POST request required.'}, status=400)
 
-# Add OCR scanning for images
+# Endpoint to check for allergens in images using OCR
 @csrf_exempt
 def scan_ocr(request):
     if request.method == 'POST':
@@ -72,6 +88,7 @@ def scan_ocr(request):
 
     return JsonResponse({'error': 'POST request required with image.'}, status=400)
 
+# Endpoint to check for allergens in text input
 @csrf_exempt
 def check_text(request):
     if request.method == 'POST':
@@ -85,48 +102,3 @@ def check_text(request):
                 return JsonResponse({
                     'input': text,
                     'allergens': found_allergens,
-                    'safe': False
-                })
-            else:
-                return JsonResponse({
-                    'input': text,
-                    'allergens': [],
-                    'safe': True
-                })
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=400)
-
-    return JsonResponse({'error': 'POST request required.'}, status=400)
-
-# Add Speech-to-Text input for allergens
-@csrf_exempt
-def check_speech(request):
-    if request.method == 'POST':
-        try:
-            audio_file = request.FILES['audio']
-            audio_data = audio_file.read()
-
-            recognizer = sr.Recognizer()
-            with sr.AudioFile(io.BytesIO(audio_data)) as source:
-                audio = recognizer.record(source)
-                text = recognizer.recognize_google(audio)
-
-            found_allergens = [a for a in COMMON_ALLERGENS if a in text.lower()]
-
-            if found_allergens:
-                return JsonResponse({
-                    'input': text,
-                    'allergens': found_allergens,
-                    'safe': False
-                })
-            else:
-                return JsonResponse({
-                    'input': text,
-                    'allergens': [],
-                    'safe': True
-                })
-
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=400)
-
-    return JsonResponse({'error': 'POST request with audio required.'}, status=400)
