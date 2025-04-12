@@ -1,11 +1,15 @@
+import json
+import os
+import requests
+import pytesseract
+import speech_recognition as sr
+from PIL import Image
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-import json
-import pytesseract
-from PIL import Image
-import speech_recognition as sr
-import io
-import requests
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import JournalEntry
+from .serializers import JournalEntrySerializer
 
 # Set path for Tesseract OCR
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
@@ -13,62 +17,33 @@ pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tessera
 # Sample list of common allergens
 COMMON_ALLERGENS = ['peanut', 'milk', 'egg', 'soy', 'wheat', 'fish', 'shellfish', 'tree nut']
 
-# Function to fetch medicine data
-def fetch_medicine_info(medicine_name):
-    try:
-        url = f"https://api.fda.gov/drug/label.json?search=brand_name:{medicine_name}&limit=1"
-        response = requests.get(url)
-        data = response.json()
-
-        if data.get('results'):
-            return data['results'][0]  # Returns the first result
-        else:
-            return None
-    except Exception as e:
-        return None
-
-# Endpoint to check for allergens in text
+# ✅ Text-based allergen checker
 @csrf_exempt
 def check_allergies(request):
     if request.method == 'POST':
         try:
-            # Check if it's text input
             data = json.loads(request.body)
             ingredients = data.get('ingredients', '').lower()
-
-            # Check for allergens in the text ingredients
-            found_allergens = [allergen for allergen in COMMON_ALLERGENS if allergen in ingredients]
+            found_allergens = [a for a in COMMON_ALLERGENS if a in ingredients]
 
             if found_allergens:
-                return JsonResponse({
-                    'status': 'danger',
-                    'message': 'Allergens found!',
-                    'allergens': found_allergens
-                })
+                return JsonResponse({'status': 'danger', 'message': 'Allergens found!', 'allergens': found_allergens})
             else:
-                return JsonResponse({
-                    'status': 'safe',
-                    'message': 'No allergens detected!'
-                })
+                return JsonResponse({'status': 'safe', 'message': 'No allergens detected!'})
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
 
     return JsonResponse({'error': 'POST request required.'}, status=400)
 
-# Endpoint to check for allergens in images using OCR
+# ✅ OCR image allergen checker
 @csrf_exempt
 def scan_ocr(request):
     if request.method == 'POST':
         try:
-            # Get image from POST request
-            image_file = request.FILES['image']  # 'image' is the key for the uploaded file
+            image_file = request.FILES['image']
             image = Image.open(image_file)
-
-            # Use Tesseract OCR to extract text
             extracted_text = pytesseract.image_to_string(image)
-
-            # Find allergens in extracted text
-            found_allergens = [allergen for allergen in COMMON_ALLERGENS if allergen in extracted_text.lower()]
+            found_allergens = [a for a in COMMON_ALLERGENS if a in extracted_text.lower()]
 
             if found_allergens:
                 return JsonResponse({
@@ -86,32 +61,51 @@ def scan_ocr(request):
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
 
-    return JsonResponse({'error': 'POST request required with image.'}, status=400)
+    return JsonResponse({'error': 'POST request with image required.'}, status=400)
 
-# Endpoint to check for allergens in text input
+# ✅ Simple text endpoint (same as check_allergies but more generic)
 @csrf_exempt
 def check_text(request):
     if request.method == 'POST':
         try:
             data = json.loads(request.body)
             text = data.get('text', '').lower()
-
             found_allergens = [a for a in COMMON_ALLERGENS if a in text]
 
-            if found_allergens:
-                return JsonResponse({
-                    'input': text,
-                    'allergens': found_allergens,
-                })
-# ... your existing views here ...
+            return JsonResponse({
+                'input': text,
+                'allergens': found_allergens,
+            })
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
 
-# 👇 Paste this at the very bottom
-import os
-import json
-import requests
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+    return JsonResponse({'error': 'POST request required.'}, status=400)
 
+# ✅ Speech-to-text allergen checker (🎙️ This is what was missing!)
+@csrf_exempt
+def check_speech(request):
+    if request.method == 'POST':
+        try:
+            audio_file = request.FILES['audio']  # Send as 'audio' key
+            recognizer = sr.Recognizer()
+
+            with sr.AudioFile(audio_file) as source:
+                audio = recognizer.record(source)
+
+            text = recognizer.recognize_google(audio)
+            found_allergens = [a for a in COMMON_ALLERGENS if a in text.lower()]
+
+            return JsonResponse({
+                'status': 'danger' if found_allergens else 'safe',
+                'transcribed_text': text,
+                'allergens': found_allergens
+            })
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
+
+    return JsonResponse({'error': 'POST request with audio required.'}, status=400)
+
+# ✅ Gemini chatbot integration
 GEMINI_API_KEY = "YOUR_API_KEY"  # Replace with your Gemini API Key
 
 @csrf_exempt
@@ -130,10 +124,23 @@ def gemini_chat(request):
 
             gemini_data = response.json()
             reply = gemini_data['candidates'][0]['content']['parts'][0]['text']
-
             return JsonResponse({'reply': reply})
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
 
     return JsonResponse({'error': 'POST request required.'}, status=400)
 
+# ✅ Journal entries (GET/POST)
+@api_view(['GET', 'POST'])
+def journal_entries(request):
+    if request.method == 'GET':
+        entries = JournalEntry.objects.all().order_by('-timestamp')
+        serializer = JournalEntrySerializer(entries, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = JournalEntrySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)

@@ -8,4 +8,5 @@ urlpatterns = [
     path('check-speech/', views.check_speech, name='check_speech'),
     path('check-medicine/', views.check_medicine, name='check_medicine'),
     path('chat/gemini/', views.gemini_chat, name='gemini_chat'),
+    path('journal/', views.journal_entries, name='journal_entries'),  # ✅ New Journal API
 ]
