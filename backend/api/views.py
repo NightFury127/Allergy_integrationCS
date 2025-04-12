@@ -102,3 +102,38 @@ def check_text(request):
                 return JsonResponse({
                     'input': text,
                     'allergens': found_allergens,
+                })
+# ... your existing views here ...
+
+# 👇 Paste this at the very bottom
+import os
+import json
+import requests
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+GEMINI_API_KEY = "YOUR_API_KEY"  # Replace with your Gemini API Key
+
+@csrf_exempt
+def gemini_chat(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            user_input = data.get('message', '')
+
+            response = requests.post(
+                'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent',
+                params={'key': GEMINI_API_KEY},
+                headers={'Content-Type': 'application/json'},
+                json={"contents": [{"parts": [{"text": user_input}]}]}
+            )
+
+            gemini_data = response.json()
+            reply = gemini_data['candidates'][0]['content']['parts'][0]['text']
+
+            return JsonResponse({'reply': reply})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+    return JsonResponse({'error': 'POST request required.'}, status=400)
+
