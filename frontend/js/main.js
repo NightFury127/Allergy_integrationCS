@@ -158,47 +158,70 @@ document.getElementById('send-to-gemini').addEventListener('click', async () => 
     showResult(`Gemini says: ${reply}`, reply.includes('Error') ? 'error' : 'safe', geminiReplyDiv);
 });
 
-// Medications (Basic Integration)
-document.getElementById('add-medication-btn').addEventListener('click', () => {
-    document.getElementById('add-med-modal').style.display = 'block';
-});
+// Import API configuration
+import { API_CONFIG, apiRequest } from './config.js';
 
-document.getElementById('medication-form').addEventListener('submit', async (e) => {
+// Authentication
+document.getElementById('login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const medData = {
-        name: document.getElementById('med-name').value,
-        type: document.getElementById('med-type').value,
-        dosage: document.getElementById('med-dosage').value,
-        schedule: document.getElementById('med-schedule').value,
-        start: document.getElementById('med-start').value,
-        notes: document.getElementById('med-notes').value
+    const formData = {
+        username: document.getElementById('username').value,
+        password: document.getElementById('password').value
     };
+
     try {
-        const response = await fetch('http://localhost:8000/api/check-medicine/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(medData)
-        });
-        const data = await response.json();
-        if (data.error) throw new Error(data.error);
-        const medDiv = document.createElement('div');
-        medDiv.className = 'medication-entry';
-        medDiv.innerHTML = `
-            <h3>${medData.name} (${medData.type})</h3>
-            <p>Dosage: ${medData.dosage}</p>
-            <p>Schedule: ${medData.schedule}</p>
-            <p>Start Date: ${medData.start || 'N/A'}</p>
-            <p>Notes: ${medData.notes || 'None'}</p>
-            <button class="btn btn-outline btn-sm">Edit</button>
-            <button class="btn btn-outline btn-sm">Delete</button>
-        `;
-        medicationsList.appendChild(medDiv);
-        document.getElementById('add-med-modal').style.display = 'none';
-        document.getElementById('medication-form').reset();
+        const response = await apiRequest(API_CONFIG.ENDPOINTS.AUTH + 'login/', 'POST', formData);
+        localStorage.setItem('auth_token', response.token);
+        window.location.href = '/dashboard.html';
     } catch (error) {
-        showResult(`Error adding medication: ${error.message}`, 'error');
+        console.error('Login failed:', error);
+        alert('Login failed. Please check your credentials.');
     }
 });
+
+// Medications Integration
+document.getElementById('add-medication-btn').addEventListener('click', async () => {
+    const modal = document.getElementById('add-med-modal');
+    modal.style.display = 'block';
+
+    const form = document.getElementById('medication-form');
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = {
+            name: document.getElementById('med-name').value,
+            dosage: document.getElementById('med-dosage').value,
+            frequency: document.getElementById('med-frequency').value
+        };
+
+        try {
+            await apiRequest(API_CONFIG.ENDPOINTS.MEDICATIONS, 'POST', formData);
+            modal.style.display = 'none';
+            alert('Medication added successfully!');
+            // Refresh medication list
+            loadMedications();
+        } catch (error) {
+            console.error('Failed to add medication:', error);
+            alert('Failed to add medication. Please try again.');
+        }
+    });
+});
+
+// Load medications
+async function loadMedications() {
+    try {
+        const medications = await apiRequest(API_CONFIG.ENDPOINTS.MEDICATIONS);
+        const container = document.getElementById('medications-list');
+        container.innerHTML = medications.map(med => `
+            <div class="medication-item">
+                <h3>${med.name}</h3>
+                <p>Dosage: ${med.dosage}</p>
+                <p>Frequency: ${med.frequency}</p>
+            </div>
+        `).join('');
+    } catch (error) {
+        console.error('Failed to load medications:', error);
+    }
+}
 
 // Telehealth (Google Maps Integration)
 findDoctorsBtn.addEventListener('click', async () => {
@@ -231,7 +254,28 @@ function checkAuth() {
 }
 document.querySelectorAll('.auth-required').forEach(el => el.addEventListener('click', checkAuth));
 
+// Test connection
+async function testConnection() {
+    try {
+        const response = await apiRequest(API_CONFIG.ENDPOINTS.TEST, 'GET');
+        console.log('Backend connection successful:', response);
+        return true;
+    } catch (error) {
+        console.error('Backend connection failed:', error);
+        return false;
+    }
+}
+
 // Initialize
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    // Test backend connection
+    const isConnected = await testConnection();
+    if (!isConnected) {
+        alert('Warning: Could not connect to backend server. Some features may not work.');
+    }
+
     checkAuth();
+    if (window.location.pathname.includes('dashboard')) {
+        loadMedications();
+    }
 });

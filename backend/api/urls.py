@@ -12,4 +12,5 @@ urlpatterns = [
     path('check-medicine/', views.check_medicine, name='check_medicine'),
     path('chat/gemini/', views.gemini_chat, name='gemini_chat'),
     path('journal/', views.journal_entries, name='journal_entries'),
+    path('test/', views.test_connection, name='test-connection'),
 ]

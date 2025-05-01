@@ -6,11 +6,12 @@ import pytesseract
 import speech_recognition as sr
 from django.http import JsonResponse
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny
 from rest_framework.response import Response
 from rest_framework import status
 from .models import JournalEntry
 from .serializers import JournalEntrySerializer
+from django.utils import timezone
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -208,3 +209,14 @@ def journal_entries(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         logger.error(f"Journal entry validation failed: {serializer.errors}")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def test_connection(request):
+    """Test endpoint to verify frontend-backend integration"""
+    return Response({
+        'status': 'success',
+        'message': 'Backend is connected and responding',
+        'timestamp': timezone.now().isoformat()
+    })
